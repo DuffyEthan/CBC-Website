@@ -60,7 +60,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
           }}
           className="pl-4 flex flex-wrap items-center gap-2 text-xs text-stone/50"
         >
-          <span>To register for any event, join our Discord —</span>
+          <span>To register for most events, join our Discord —</span>
           <a
             href={DISCORD_INVITE}
             target="_blank"
@@ -69,6 +69,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
           >
             {DISCORD_INVITE_LABEL} ↗
           </a>
+          <span>— events with an external registration link show it below.</span>
         </div>
       </div>
 
@@ -224,9 +225,20 @@ function UpcomingEventPanel({ ev }: { ev: Event }) {
         >
           {ev.time} · {ev.location}
         </p>
-        <p className="font-sans text-base text-stone leading-relaxed max-w-xl">
+        <p className="font-sans text-base text-stone leading-relaxed max-w-xl mb-5">
           {ev.description}
         </p>
+        {ev.registrationUrl && (
+          <a
+            href={ev.registrationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontFamily: MONO, borderColor: accentColor }}
+            className="inline-block text-xs px-3 py-1.5 border rounded-sm text-foreground hover:bg-foreground hover:text-background transition-colors"
+          >
+            Register ↗
+          </a>
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export type Event = {
   description: string;
   upcoming: boolean;
   attendees?: number;
+  registrationUrl: string | null; // set for events that register externally (e.g. Luma)
 };
 
 export type Announcement = {
@@ -144,6 +145,7 @@ type EventRow = {
   duration_minutes: number;
   attended_count: number;
   registered_count: number;
+  registration_url: string | null;
 };
 
 export const getEvents = cached<Event[]>(
@@ -152,7 +154,7 @@ export const getEvents = cached<Event[]>(
   async () => {
     const rows = await query<EventRow>(
       `select id, name, type, description, location, starts_at,
-              duration_minutes, attended_count, registered_count
+              duration_minutes, attended_count, registered_count, registration_url
          from events
         order by starts_at desc
         limit 500`,
@@ -173,6 +175,7 @@ export const getEvents = cached<Event[]>(
         description: r.description ?? "",
         upcoming,
         attendees: !upcoming && r.attended_count > 0 ? r.attended_count : undefined,
+        registrationUrl: r.registration_url,
       };
     });
   },
