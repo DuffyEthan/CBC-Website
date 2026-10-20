@@ -1,3 +1,6 @@
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://trinity.claudebuilders.club";
+
 // Single source of truth for the club's Discord invite. Was hardcoded in ~13
 // places (and in two different URL forms).
 export const DISCORD_INVITE = "https://discord.gg/rFe8tJ88ww";

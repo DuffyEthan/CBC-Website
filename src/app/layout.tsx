@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { SITE_URL } from "@/lib/constants";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:8443"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Claude Builder Club",
     template: "%s · Claude Builder Club",
@@ -25,10 +26,14 @@ export const metadata: Metadata = {
   description:
     "The Claude Builder Club at Trinity College Dublin — a student society that ships real AI applications with Claude and the Anthropic API. See what members have built, upcoming events, and how to join.",
   applicationName: "Claude Builder Club",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Claude Builder Club",
     description:
       "A Trinity College Dublin student society building real AI applications with Claude. Projects, events, and how to join.",
+    url: "/",
     siteName: "Claude Builder Club",
     locale: "en_IE",
     type: "website",
@@ -39,8 +44,7 @@ export const metadata: Metadata = {
     description:
       "A Trinity College Dublin student society building real AI applications with Claude.",
   },
-  // Flip to `{ index: true, follow: true }` at launch.
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
